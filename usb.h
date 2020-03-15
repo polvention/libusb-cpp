@@ -61,7 +61,7 @@ class Usb
     auto dumpDeviceList() -> void;
 
     auto registerListener(int32_t vendorId, int32_t productId, int32_t deviceClass,
-                         std::function<void(const UsbHandle&)>) -> UsbCallback;
+                         std::function<void(const std::unique_ptr<UsbHandle>&, UsbHandle::Event)>) -> UsbCallback;
 
     auto unregisterListener(UsbCallback) -> void;
 

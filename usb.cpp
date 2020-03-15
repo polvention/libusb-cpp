@@ -33,7 +33,7 @@ plv::usb::Usb::Usb()
 	if (ret < 0) {
 		throw plv::usb::UsbException("Usb init failed:" + std::to_string(ret));
 	}
-	libusb_set_debug(o_->ctx_, 3);
+	//libusb_set_debug(o_->ctx_, 3);
 }
 
 auto plv::usb::Usb::dumpDeviceList() -> void
