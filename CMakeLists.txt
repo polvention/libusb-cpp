@@ -57,6 +57,7 @@ add_library(libusb usb.cpp ${src})
 
 target_include_directories(libusb
     PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
     ${LIBUSB_DIR}
     ${LIBUSB_SRC_DIR}
     ${LIBUSB_OS_SRC_DIR}

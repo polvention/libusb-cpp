@@ -1,5 +1,5 @@
-#ifndef USB_H_
-#define USB_H_
+#ifndef PLV_USB_H_
+#define PLV_USB_H_
 #include <memory>
 #include <stdexcept>
 #include <vector>
@@ -27,6 +27,7 @@ class UsbCallback
     friend Usb;
 };
 
+/*
 class UsbDevice
 {
 public:
@@ -40,7 +41,7 @@ private:
     std::unique_ptr<struct Opaque> o_;
     friend Usb;
 };
-
+*/
 class UsbHandle
 {
     enum Event
@@ -56,7 +57,9 @@ class UsbHandle
 
 class Usb
 {
+public:
     Usb();
+    ~Usb() = default;
 
     auto dumpDeviceList() -> void;
 
@@ -65,10 +68,10 @@ class Usb
 
     auto unregisterListener(UsbCallback) -> void;
 
-    auto openDevice(const UsbDevice&) -> std::unique_ptr<UsbHandle>;
+//    auto openDevice(const UsbDevice&) -> std::unique_ptr<UsbHandle>;
 private:
     struct Opaque;
-    std::unique_ptr<struct Opaque> o_;
+    std::unique_ptr<Opaque> o_;
 };
 }
 #endif // USB_H_

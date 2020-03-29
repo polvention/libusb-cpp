@@ -8,6 +8,7 @@ using plv::usb::UsbHandle;
 
 struct plv::usb::Usb::Opaque
 {
+    Opaque() = default;
 	libusb_context *ctx_ = nullptr;
     std::unordered_map<libusb_device*, std::unique_ptr<UsbHandle>> handlers_{};
 };
@@ -21,13 +22,13 @@ struct plv::usb::UsbHandle::Opaque
 {
     libusb_device_handle *handle = nullptr;
 };
-
+/*
 struct plv::usb::UsbDevice::Opaque
 {
     libusb_device_handle *handle = nullptr;
 };
-
-plv::usb::Usb::Usb()
+*/
+plv::usb::Usb::Usb(): o_(std::make_unique<plv::usb::Usb::Opaque>())
 {
 	int ret = libusb_init(&o_->ctx_);
 	if (ret < 0) {
@@ -115,21 +116,18 @@ auto plv::usb::Usb::unregisterListener(UsbCallback callback) -> void
 {
     libusb_hotplug_deregister_callback(o_->ctx_, callback.o_->handle);
 }
-
+/*
 auto plv::usb::Usb::openDevice(const UsbDevice& device) -> std::unique_ptr<UsbHandle>
 {
     auto handle_ptr = std::make_unique<UsbHandle>();
-    /*
     ssize_t ret = libusb_open(device.o_->dev, &handle_ptr->o_->handle);
     if (ret < 0)
     {
         throw plv::usb::UsbException("Opening device failed:" + std::to_string(ret));
     }
-    */
     return handle_ptr;
 }
 
-/*
 int main() {
 	for(ssize_t i = 0; i < cnt; i++) {
 		printdev(devs[i]);

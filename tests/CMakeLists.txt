@@ -9,6 +9,7 @@ set(src
 add_executable(watchman_test ${src})
 
 target_link_libraries(watchman_test
+    libusb
     gtest
     gtest_main
     )
